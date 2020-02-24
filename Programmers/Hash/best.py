@@ -7,8 +7,9 @@ def solution(genres,plays):
         playsDict[i] = playsDict.get(i, 0) + j
         d[i] = d.get(i, []) + [(j, x)]
         x = x + 1
-
+    print(d)
     arr = sorted(playsDict.items(), key=lambda x: x[1], reverse=True)
+    print(arr)
     res = []
     for i in range(len(arr)):
         arr2 = sorted(d[arr[i][0]], key=lambda x: x[0], reverse=True)
@@ -18,6 +19,12 @@ def solution(genres,plays):
             res.append(arr2[1][1])
 
     return res
+
+
+genres=	["classic", "pop", "classic", "classic", "pop"]
+plays=[500, 600, 150, 800, 2500]
+
+solution(genres,plays)
 
 '''
 def solution(genres, plays):
