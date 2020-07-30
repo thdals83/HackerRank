@@ -1,56 +1,49 @@
-def create(x,ar,depth, tmp, visited):
+from itertools import permutations
 
-    if (depth == x):
-        x=('').join(tmp)
-        x=int(x)
-        num.append(x)
-        return
+def solution(n):
+    a = set()
+    for i in range(len(n)):
+        a |= set(map(int, map("".join, permutations(list(n), i + 1))))
+        print(a)
 
-    for i in range(len(ar)):
-        if(visited[i]==False):
-            visited[i]=True
-            tmp.append(ar[i])
-            create(x,ar,depth+1)
-            visited[i]=False
-            tmp.pop()
+    a -= set(range(0, 2))
 
-def confirm(array, n):
-    list = [False, False] + [True] * (n - 1)
-    index=[]
-    count=0
-    for i in range(2,n+1):
-        if(list[i]==True):
-            index.append(i)
-            for j in range(2*i,n+1,i):
-                list[j]=False
+    for i in range(2, int(max(a) ** 0.5) + 1):
+        a -= set(range(i * 2, max(a) + 1, i))
+    print(a)
+    return len(a)
 
-    for i in array:
-        for j in index:
-            if(i==j):
-                count=count+1
+if __name__=="__main__":
+    print(solution("17"))
+
+
+'''
+from itertools import permutations
+
+def solution(s):
+    answer = 0
+
+    new_s = list(s)
+    for i in range(2,len(s)+1):
+        pm = list(permutations(s, i))
+        for j in pm:
+            if len(j) <= len(s):
+                new_s.append(''.join(j))
+    new_s = list(set([int(x) for x in new_s]))
+    
+    if new_s.count(1):
+        new_s.remove(1)
+    if new_s.count(0):
+        new_s.remove(0)
+
+    for x in new_s:
+        i = 2
+        while i*i <= x: 
+            if x % i == 0:
+                answer -= 1
                 break
-
-    return count
-
-def solution(numbers):
-    # answer = 0
-    # x=input()
-    arr = []
-    tmp = []
-    for i in numbers: arr.append(i)
-    visited = [False] * len(arr)
-    num = []
-    for i in range(1, len(arr) + 1):
-        create(i, arr, 0)
-
-
-
-
-
-
-    num = set(num)
-    num = list(num)
-    max = max(num)
-    # print(confirm(num,max))
-
-    return confirm(num, max)
+            i+=1
+        answer += 1
+    
+    return answer
+'''
