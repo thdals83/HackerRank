@@ -8,13 +8,16 @@ def solution(n):
 
     a -= set(range(0, 2))
 
+    print(int(max(a) ** 0.5))
     for i in range(2, int(max(a) ** 0.5) + 1):
+        print(i)
         a -= set(range(i * 2, max(a) + 1, i))
+        print(a)
     print(a)
     return len(a)
 
 if __name__=="__main__":
-    print(solution("17"))
+    print(solution("011"))
 
 
 '''
